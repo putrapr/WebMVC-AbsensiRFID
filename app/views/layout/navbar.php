@@ -23,8 +23,11 @@
         <a class="nav-link hv" href="<?= BASEURL; ?>/karyawan">Data Karyawan</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link hv" href="<?= BASEURL; ?>/izin">Izin Karyawan</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link hv" href="<?= BASEURL; ?>/harian">Absensi Harian</a>
-      </li>        
+      </li>            
       <li class="nav-item">
         <a class="nav-link hv" href="<?= BASEURL; ?>/bulanan">Rekap Bulanan</a>
       </li> 

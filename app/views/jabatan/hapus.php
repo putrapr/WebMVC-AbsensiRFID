@@ -26,7 +26,7 @@
         
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
-          <button type="submit" class="btn btn-primary" name="simpanModal">Simpan</button>
+          <button type="submit" class="btn btn-primary" name="simpanModal">Hapus</button>
         </div>
       </form>
     </div>

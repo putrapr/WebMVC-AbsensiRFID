@@ -1,6 +1,7 @@
 <?php
 
 define('BASEURL', 'http://localhost:8080/absensi-rfid');
+
 // DB
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');

@@ -40,4 +40,9 @@ class KaryawanModel {
     $this->db->query("DELETE FROM $this->table WHERE nokartu='$nokartu'");
     return $this->db->resultSet();
   }
+
+  public function getNoKartuWhereNama($nama) {
+    $this->db->query("SELECT nokartu FROM $this->table WHERE nama='$nama'");
+    return $this->db->resultSet();
+  }
 }

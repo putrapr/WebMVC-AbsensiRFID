@@ -23,4 +23,9 @@ class JabatanModel {
                       WHERE nama_jabatan='$nama_lama'");
     return $this->db->resultSet();
   }
+
+  public function deleteJabatan($nama_lama){
+    $this->db->query("DELETE FROM $this->table WHERE nama_jabatan='$nama_lama'");
+    return $this->db->resultSet();
+  }
 }

@@ -25,19 +25,11 @@
           </div>    
           <div class="mb-3">
             <label for="c" class="form-label">Jabatan Baru</label>
-            <input type="text" name="jb_baru" class="form-control" id="c" required
-            <?php if (!empty($data['nama_baru'])) echo "value='".$data['nama_baru']."'"?>>
-            <?php 
-              if (isset($_SESSION['err'])) {
-                echo "<div class='form-text text-danger'>".$_SESSION['err']."</div>";
-                unset($_SESSION['err']);
-              }
-            ?>
+            <input type="text" name="jb_baru" class="form-control" id="c" required>
           </div>
           <div class="mb-3">
             <label for="d" class="form-label">Nilai Hirarki</label>
-            <input type="number" name="nilai" class="form-control" id="d" required
-            <?php if (!empty($data['nilai'])) echo "value='".$data['nilai']."'"?>>
+            <input type="number" name="nilai" class="form-control" id="d" required>
           </div>     
         </div>
         

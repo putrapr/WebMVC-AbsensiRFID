@@ -28,11 +28,6 @@ class AbsensiModel {
                       ORDER BY $order");
     return $this->db->resultSet();
   }
-  
-  public function getAllKeterangan(){
-    $this->db->query("SELECT DISTINCT(keterangan) FROM $this->table");
-    return $this->db->resultSet();
-  }
 
   public function updateKeterangan($nokartu, $keterangan, $tanggal){
     $this->db->query("UPDATE $this->table SET keterangan = '$keterangan' 
