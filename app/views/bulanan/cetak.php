@@ -53,14 +53,6 @@
   <br><br>
   <script>
 		window.print();
-    // var divContents = document.getElementById("main_div").innerHTML; 
-    // var a = window.open('', '', 'height=1000, width=1000'); 
-    // a.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"><html>'); 
-    // a.document.write('<body>'); 
-    // a.document.write(divContents); 
-    // a.document.write('</body></html>'); 
-    // a.document.close(); 
-    // a.print();
 	</script>
 </body>
 </html></html>

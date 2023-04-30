@@ -15,11 +15,14 @@ class BulananController extends Controller {
     $data['nav'] = "Rekap Absensi ".$this->semuaBln[$_SESSION['bln']]." ".$_SESSION['thn'];
     $data['absensi'] = $this->model('AbsensiModel')
       ->getAbsensiWhereTgl($_SESSION['bln'], $_SESSION['thn']);
+    $data['hariKerja'] = $this->model('AbsensiModel')->getHariKerja($_SESSION['bln'], $_SESSION['thn']);
     $data['karyawan'] = $this->model('KaryawanModel')
       ->getAllKaryawanJoinOrder('jabatan', 'jabatan', 'nama_jabatan', 'hirarki_jabatan');
     $data['semuaBln'] = $this->semuaBln;
-    $data['bulanLalu'] = $_SESSION['bln'];
-    $data['tahun'] = $_SESSION['thn'];
+    $data['semuaHari'] = $this->semuaHari;
+    $a = $this->model('AbsensiModel')->checkPermanentHari($_SESSION['bln'], $_SESSION['thn']);
+    if ($a) $data['hariOn']='ya';
+
     $this->view('layout/header', $data);
     $this->view('bulanan/index', $data);
     $this->view('layout/footer');
@@ -96,8 +99,58 @@ class BulananController extends Controller {
     $data['absensi'] = $this->model('AbsensiModel')
       ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'tanggal');
 
-    // $this->view('layout/header', $data);
     $this->view('bulanan/cetak', $data);
-    // $this->view('layout/footer');
   }
+
+  public function hariKerja(){
+    if (isset($_POST['simpanKerja'])) $this->simpanHariKerja();
+    else if (isset($_POST['permanenKerja'])) $this->permanenHariKerja();
+  }
+
+  public function simpanHariKerja(){
+    if (isset($_POST['tgl'])) {
+      // dapatkan tgl yang hari kerja 'Ya' pada bulan dan tahun ke x
+      $dbTgl_on = $this->model('AbsensiModel')->getHariKerja($_SESSION['bln'], $_SESSION['thn'], 'Ya');
+      $i=0;
+      foreach ($dbTgl_on as $tgl_on) {
+        $tgl = substr($tgl_on['tanggal'],8);
+        if (substr($tgl, 0, 1) == '0') $tgl = substr($tgl, 1);
+        $oldTgl_on[$i] = $tgl;
+        $i++;
+      }
+
+      // dapatkan tgl_on & tgl_off baru
+      $newTgl_on = $_POST['tgl'];
+      $year_month = $_SESSION['thn'].'-'.$_SESSION['bln'];
+      $lastday = date("t", strtotime($year_month));
+      $number = range(1, $lastday);      
+      $newTgl_off = array_values(array_diff($number, $newTgl_on));
+
+      // pilih tgl baru yang berbeda kondisi dengan yang ada pada database
+      $diffTgl_on = array_values(array_diff($oldTgl_on, $newTgl_on));
+      $diffTgl_on2 = array_values(array_diff($newTgl_on, $oldTgl_on));
+      $diffTgl_on = array_merge($diffTgl_on,$diffTgl_on2);
+      
+      // ambil irisan dari tgl baru (on/off) dan tgl beda kondisi
+      $newTgl_on = array_intersect($newTgl_on, $diffTgl_on);
+      $newTgl_off = array_intersect($newTgl_off, $diffTgl_on);
+
+      // perbarui DB tgl lama dengan tgl baru (khusus yang berbeda saja)
+      foreach ($newTgl_on as $tgl){
+        $u = $this->model('AbsensiModel')->updateHariKerja($year_month.'-'.$tgl,'Ya');
+      }
+      foreach ($newTgl_off as $tgl){
+        $u = $this->model('AbsensiModel')->updateHariKerja($year_month.'-'.$tgl,'Tidak');
+      }
+      unset($u);
+      return header('location:'.BASEURL.'/bulanan');
+    }
+  }
+
+  public function permanenHariKerja(){
+    $u = $this->model('AbsensiModel')->updateToYaFix($_SESSION['bln'], $_SESSION['thn']);
+    $u = $this->model('AbsensiModel')->deleteAbsensiWhere($_SESSION['bln'], $_SESSION['thn']);
+    return header('location:'.BASEURL.'/bulanan');
+  }
+
 }

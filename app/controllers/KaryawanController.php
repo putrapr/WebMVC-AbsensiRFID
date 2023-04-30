@@ -7,6 +7,7 @@ class KaryawanController extends Controller {
     $data['nav'] = 'Data Karyawan';
     $data['karyawan'] = $this->model('KaryawanModel')
       ->getAllKaryawanJoinOrder('jabatan', 'jabatan', 'nama_jabatan', 'hirarki_jabatan');
+
     $this->view('layout/header', $data);
     $this->view('karyawan/index', $data);
     $this->view('layout/footer');
@@ -18,7 +19,6 @@ class KaryawanController extends Controller {
     $data['nav'] = 'Tambah Karyawan';
     $data['jabatan'] = $this->model('JabatanModel')->getAllJabatanOrder('nama_jabatan');
     
-    // Form tambah karyawan
     $this->view('layout/header', $data);
     $this->view('karyawan/tambah', $data);
     $this->view('layout/footer');
@@ -40,7 +40,7 @@ class KaryawanController extends Controller {
     $data['nav'] = 'Edit Karyawan';    
     $data['karyawan'] = $this->model('KaryawanModel')->getSingleKaryawan($nokartu);
     $data['jabatan'] = $this->model('JabatanModel')->getAllJabatanOrder('nama_jabatan');
-    // Form edit karyawan
+    
     $this->view('layout/header', $data);
     $this->view('karyawan/edit', $data);
     $this->view('layout/footer');
@@ -52,7 +52,6 @@ class KaryawanController extends Controller {
     $jabatan = $_POST['jabatan'];
     $telp = $_POST['telp'];
     $alamat = $_POST['alamat'];
-    // echo "$nokartu <br> $nama <br> $jabatan <br> $telp <br> $alamat"; die();
     $a = $this->model('KaryawanModel')->updateKaryawan($nokartu, $nama, $jabatan, $telp, $alamat);
     return header('location:'.BASEURL.'/karyawan');
   }

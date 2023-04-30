@@ -12,10 +12,8 @@ class LoginController extends Controller {
     $pass = $_POST['password'];
     $login = $this->model('PenggunaModel')->validate($user, $pass);
     if ($login){
-      // Jika login berhasil
-      
-      $_SESSION['login'] = $login[0]['id'];      
-      // $_SESSION['login'] = 'ada';
+      // Jika login berhasil      
+      $_SESSION['login'] = $login[0]['id'];
       header('location:'.BASEURL.'/beranda');
     } else {
       // Jika login gagal

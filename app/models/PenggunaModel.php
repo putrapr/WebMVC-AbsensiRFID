@@ -12,6 +12,5 @@ class PenggunaModel {
     $this->db->query("SELECT * FROM $this->table 
                       WHERE username = '$user' AND password = '$pass'");
     return $this->db->resultSet();
-  }
-  
+  }  
 }

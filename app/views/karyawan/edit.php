@@ -4,7 +4,6 @@
       <label for="a" class="form-label">No. Kartu</label>
       <input readonly type="text" name="nokartu" class="form-control" id="a" aria-describedby="emailHelp" style="width:200px;"
         value="<?= $data['karyawan'][0]['nokartu']; ?>">
-      <!-- <div id="emailHelp" class="form-text">Note</div> -->
     </div>
     <div class="mb-3">
       <label for="b" class="form-label">Nama Karyawan</label>

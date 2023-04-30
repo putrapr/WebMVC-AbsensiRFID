@@ -7,7 +7,6 @@ class JabatanController extends Controller {
     $data['nav'] = 'Atur Jabatan';
     $data['jabatan'] = $this->model('JabatanModel')->getAllJabatanOrder('hirarki_jabatan','','+0');
 
-    // Form jabatan
     $this->view('layout/header', $data);
     $this->view('jabatan/index', $data);
     $this->view('layout/footer');
@@ -26,7 +25,6 @@ class JabatanController extends Controller {
   }
 
   public function ubah(){
-    // echo 'Masuk Edit'; die();
     $nama_lama = $_POST['jb_lama'];
     $nama_baru = $_POST['jb_baru'];
     $nilai = $_POST['nilai'];

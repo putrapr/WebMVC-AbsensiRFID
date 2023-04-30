@@ -51,10 +51,7 @@
             <ul class="dropdown-menu">
               <?php                
                 foreach ($data['keterangan'] as $ket) {
-                  if ($ket == $abs['keterangan']){
-                    continue;
-                  }
-
+                  if ($ket == $abs['keterangan']) continue;
                   $urlUbah = BASEURL.'/bulanan/ubahKeterangan/'.$abs['nokartu'].'/'.str_replace(' ', '-', $ket).'/'.$abs['tanggal'];
                   echo "<li><a class='dropdown-item' href='$urlUbah'>".$ket."</a></li>";
                 }

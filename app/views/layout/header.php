@@ -10,17 +10,26 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
   <?php if($data['judul'] == "Scan Kartu") { ?>
     <script src="<?= BASEURL; ?>/public/jquery/scan.js"></script>
-  <?php } else if ($data['judul'] == "Cetak Absensi") { ?>
-    <style>
-      @media print {
-        .vendorListHeading th {
-          background-color: #A9A9A9;
-          color: white;
-          print-color-adjust: exact; 
-        }
+  <?php } else if ($data['judul'] == "Data Bulanan")  { ?>
+    <style> 
+      input[type=checkbox]:checked + label { 
+        background-color: #3B71CA !important;
+        color:white !important;
+      }
+      input[type=checkbox]:hover + label {        
+        color:white !important;
+      }
+      input[type=checkbox] + label { 
+        background-color: #DC4C64 !important;
+        color:white;
+        border:none;
+      }
+      .tgl {
+        width:40px;
       }
     </style>
-  <?php }?>
+  <?php } ?>
+
   <title><?= $data['judul']; ?></title>
 </head>
 <body>
