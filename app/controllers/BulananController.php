@@ -14,7 +14,11 @@ class BulananController extends Controller {
     $data['judul'] = 'Data Bulanan';
     $data['nav'] = "Rekap Absensi ".$this->semuaBln[$_SESSION['bln']]." ".$_SESSION['thn'];
     $data['absensi'] = $this->model('AbsensiModel')
-      ->getAbsensiWhereTgl($_SESSION['bln'], $_SESSION['thn']);
+      ->getAbsensiWhereTgl($_SESSION['bln'], $_SESSION['thn'], 'Ya');
+    if (!$data['absensi']) {
+      $data['absensi'] = $this->model('AbsensiModel')
+      ->getAbsensiWhereTgl($_SESSION['bln'], $_SESSION['thn'], 'Ya-Fix');
+    }
     $data['hariKerja'] = $this->model('AbsensiModel')->getHariKerja($_SESSION['bln'], $_SESSION['thn']);
     $data['karyawan'] = $this->model('KaryawanModel')
       ->getAllKaryawanJoinOrder('jabatan', 'jabatan', 'nama_jabatan', 'hirarki_jabatan');
@@ -43,7 +47,11 @@ class BulananController extends Controller {
 
     // Ambil data absensi 1 orang dalam bulan tersebut
     $data['absensi'] = $this->model('AbsensiModel')
-      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'tanggal');
+      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'Ya', 'tanggal');
+    if (!$data['absensi']) {
+      $data['absensi'] = $this->model('AbsensiModel')
+      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'Ya-Fix', 'tanggal');
+    }
       
     // Ambil semua keterangan
     $data['keterangan'] = $this->kehadiran;

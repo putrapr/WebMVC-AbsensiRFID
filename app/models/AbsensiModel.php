@@ -2,6 +2,7 @@
 
 class AbsensiModel {
   private $table = 'absensi';
+  private $templat = "AND hari_kerja = 'Ya' OR hari_kerja = 'Ya-Fix'";
   private $db;
 
   public function __construct(){
@@ -16,8 +17,8 @@ class AbsensiModel {
     return $this->db->resultSet();
   }
 
-  public function getAbsensiWhereTgl($bulan, $tahun){
-    $this->db->query("SELECT * FROM $this->table WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun' AND hari_kerja = 'Ya'");
+  public function getAbsensiWhereTgl($bulan, $tahun, $hariKerja){
+    $this->db->query("SELECT * FROM $this->table WHERE MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun' AND hari_kerja = '$hariKerja'");
     return $this->db->resultSet();
   }
 
@@ -28,9 +29,9 @@ class AbsensiModel {
     return $this->db->resultSet();
   }
 
-  public function getSingleAbsensiOrder($nokartu, $bulan, $tahun, $order){
+  public function getSingleAbsensiOrder($nokartu, $bulan, $tahun, $hariKerja, $order){
     $this->db->query("SELECT * FROM $this->table WHERE nokartu='$nokartu' 
-      AND MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun' AND hari_kerja = 'Ya' ORDER BY $order");
+      AND MONTH(tanggal) = '$bulan' AND YEAR(tanggal) = '$tahun' AND hari_kerja = '$hariKerja' ORDER BY $order");
     return $this->db->resultSet();
   }
 

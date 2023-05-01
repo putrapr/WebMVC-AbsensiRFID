@@ -13,11 +13,11 @@
 
 
 	//baca tabel tmprfid
-		$baca_kartu = mysqli_query($konek, "SELECT * from tmprfid");
-		$data_kartu = mysqli_fetch_array($baca_kartu);
-		isset($data_kartu['nokartu'])? $nokartu = $data_kartu['nokartu'] : $nokartu = "";
+	$baca_kartu = mysqli_query($konek, "SELECT * from tmprfid");
+	$data_kartu = mysqli_fetch_array($baca_kartu);
+	isset($data_kartu['nokartu'])? $nokartu = $data_kartu['nokartu'] : $nokartu = "";
 		
-		// $nokartu = 1122;
+	// $nokartu = 1122;
 	$imgUrl = 'http://localhost:8080/absensi-rfid/public/img';
 ?>
 
