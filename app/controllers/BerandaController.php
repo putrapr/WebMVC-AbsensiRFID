@@ -21,7 +21,7 @@ class BerandaController extends Controller {
     }
     $month += 1;
     $tanggal = $year.'-'.$month.'-1';
-    $a = $this->model('AbsensiModel')->getAbsensiWhereTgl($month, $year);
+    $a = $this->model('AbsensiModel')->getAbsensiWhereTgl($month, $year, 'Ya');
 
     // Jika data absensi bulan depan masih kosong, BUAT data absensi
     if (!$a) {

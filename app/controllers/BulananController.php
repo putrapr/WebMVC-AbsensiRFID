@@ -105,7 +105,11 @@ class BulananController extends Controller {
 
     // Ambil data absensi 1 orang dalam bulan tersebut
     $data['absensi'] = $this->model('AbsensiModel')
-      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'tanggal');
+      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'Ya', 'tanggal');
+    if (!$data['absensi']) {
+      $data['absensi'] = $this->model('AbsensiModel')
+      ->getSingleAbsensiOrder($nokartu, $_SESSION['bln'], $_SESSION['thn'], 'Ya-Fix', 'tanggal');
+    }
 
     $this->view('bulanan/cetak', $data);
   }
